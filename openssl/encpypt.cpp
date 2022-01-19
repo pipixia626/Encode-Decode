@@ -7,70 +7,70 @@ Encpypt::Encpypt(unsigned char* datas, int len)
 }
 
 
-//1~256×Ö½Ú
+//1~256å­—èŠ‚
 void Encpypt::RC4_Test()
 {
 	unsigned char* en_data=new unsigned char [strlen((const char*)keyflow)];
 	unsigned char* de_data = new unsigned char[len];
 	
-	//¼ÓÃÜ
+	//åŠ å¯†
 	RC4_KEY key;
 	RC4_set_key(&key, strlen((const char*)keyflow), (unsigned char*)keyflow);
 	RC4(&key, len, datas, en_data);
 
-	std::cout << "ÃÜÎÄ:" <<std::endl;
+	std::cout << "å¯†æ–‡:" <<std::endl;
 	std::cout << en_data << std::endl;
-	//½âÃÜ
+	//è§£å¯†
 	RC4_set_key(&key, strlen((const char*)keyflow), (unsigned char*)keyflow);
 	RC4(&key, len, en_data, de_data);
 
-	std::cout << "Ã÷ÎÄ:" << std::endl;
+	std::cout << "æ˜æ–‡:" << std::endl;
 		for (int i = 0; i < len; ++i) {
 			std::cout << de_data[i];
 	}
 		std::cout<<std::endl;
 }
-// 8×Ö½Ú
+// 8å­—èŠ‚
 void Encpypt::DES_Test()
 {   
 	
 	unsigned char* en_data = new unsigned char[(len/8)*8+8];
 	unsigned char* de_data = new unsigned char[8];
 
-	// ÉèÖÃÃÜÔ¿
-	const_DES_cblock key = "1234567";//Ô­Ê¼ÃÜÔ¿ÓÃÀ´Éú³ÉÃÜÔ¿
-	DES_key_schedule key_sch;//Éú³ÉÃÜÔ¿
+	// è®¾ç½®å¯†é’¥
+	const_DES_cblock key = "1234567";//åŸå§‹å¯†é’¥ç”¨æ¥ç”Ÿæˆå¯†é’¥
+	DES_key_schedule key_sch;//ç”Ÿæˆå¯†é’¥
 
 	DES_set_key(&key, &key_sch);
 
-	//ECBµÄ·½Ê½¼ÓÃÜ£¨8×Ö½Ú£©
-	DES_ecb_encrypt((const_DES_cblock*)datas, (DES_cblock*)en_data, &key_sch, 1);//1ÊÇ¼ÓÃÜ£¬0ÊÇ½âÃÜ
-	std::cout << "¼ÓÃÜ£º" << std::endl;
+	//ECBçš„æ–¹å¼åŠ å¯†ï¼ˆ8å­—èŠ‚ï¼‰
+	DES_ecb_encrypt((const_DES_cblock*)datas, (DES_cblock*)en_data, &key_sch, 1);//1æ˜¯åŠ å¯†ï¼Œ0æ˜¯è§£å¯†
+	std::cout << "åŠ å¯†ï¼š" << std::endl;
 	std::cout << en_data << std::endl;
-	//ECB·½Ê½½âÃÜ
+	//ECBæ–¹å¼è§£å¯†
 	DES_ecb_encrypt((const_DES_cblock*)en_data, (DES_cblock*)de_data, &key_sch, 0);
-	std::cout << "½âÃÜ£º" << std::endl;
+	std::cout << "è§£å¯†ï¼š" << std::endl;
 	std::cout << de_data << std::endl;
 	
 		
 }
 
-//8×Ö½Ú
+//8å­—èŠ‚
 void Encpypt::DES3_Test()
 {
 	unsigned char* en_data = new unsigned char[(len / 8) * 8 + 8];
 	unsigned char* de_data = new unsigned char[8];
 
 
-	// ÉèÖÃÃÜÔ¿1
-	const_DES_cblock key1 = "1234567";//Ô­Ê¼ÃÜÔ¿ÓÃÀ´Éú³ÉÃÜÔ¿
-	DES_key_schedule key_sch1;//Éú³ÉÃÜÔ¿
-	// ÉèÖÃÃÜÔ¿2
-	const_DES_cblock key2 = "2345678";//Ô­Ê¼ÃÜÔ¿ÓÃÀ´Éú³ÉÃÜÔ¿
-	DES_key_schedule key_sch2;//Éú³ÉÃÜÔ¿
-	// ÉèÖÃÃÜÔ¿3
-	const_DES_cblock key3 = "3456789";//Ô­Ê¼ÃÜÔ¿ÓÃÀ´Éú³ÉÃÜÔ¿
-	DES_key_schedule key_sch3;//Éú³ÉÃÜÔ¿
+	// è®¾ç½®å¯†é’¥1
+	const_DES_cblock key1 = "1234567";//åŸå§‹å¯†é’¥ç”¨æ¥ç”Ÿæˆå¯†é’¥
+	DES_key_schedule key_sch1;//ç”Ÿæˆå¯†é’¥
+	// è®¾ç½®å¯†é’¥2
+	const_DES_cblock key2 = "2345678";//åŸå§‹å¯†é’¥ç”¨æ¥ç”Ÿæˆå¯†é’¥
+	DES_key_schedule key_sch2;//ç”Ÿæˆå¯†é’¥
+	// è®¾ç½®å¯†é’¥3
+	const_DES_cblock key3 = "3456789";//åŸå§‹å¯†é’¥ç”¨æ¥ç”Ÿæˆå¯†é’¥
+	DES_key_schedule key_sch3;//ç”Ÿæˆå¯†é’¥
 
 	DES_set_key((DES_cblock*)key1, &key_sch1);
 
@@ -80,17 +80,17 @@ void Encpypt::DES3_Test()
 	
 
 	
-	// ¼ÓÃÜ
-	DES_ecb3_encrypt((const_DES_cblock*)datas, (DES_cblock*)en_data, &key_sch1,&key_sch2,&key_sch3,1);//1ÊÇ¼ÓÃÜ£¬0ÊÇ½âÃÜ
-	std::cout << "¼ÓÃÜ£º" << std::endl;
+	// åŠ å¯†
+	DES_ecb3_encrypt((const_DES_cblock*)datas, (DES_cblock*)en_data, &key_sch1,&key_sch2,&key_sch3,1);//1æ˜¯åŠ å¯†ï¼Œ0æ˜¯è§£å¯†
+	std::cout << "åŠ å¯†ï¼š" << std::endl;
 	std::cout << en_data << std::endl;
-	// ½âÃÜ
-	DES_ecb3_encrypt((const_DES_cblock*)en_data, (DES_cblock*)de_data, &key_sch1, &key_sch2, &key_sch3, 0);//1ÊÇ¼ÓÃÜ£¬0ÊÇ½âÃÜ
-	std::cout << "½âÃÜ£º" << std::endl;
+	// è§£å¯†
+	DES_ecb3_encrypt((const_DES_cblock*)en_data, (DES_cblock*)de_data, &key_sch1, &key_sch2, &key_sch3, 0);//1æ˜¯åŠ å¯†ï¼Œ0æ˜¯è§£å¯†
+	std::cout << "è§£å¯†ï¼š" << std::endl;
 	std::cout << de_data << std::endl;
 }
 
-// 16×Ö½Ú
+// 16å­—èŠ‚
 void Encpypt::AES_Test()
 {
 
@@ -98,39 +98,50 @@ void Encpypt::AES_Test()
 	unsigned char* de_data = new unsigned char[16];
 	unsigned char iv[AES_BLOCK_SIZE] = { 0 };
 
-	unsigned char* key = (unsigned char*)"1wradfr4e3fefefad4545454h6thrsf";//32×Ö½Ú 256Î»
+	unsigned char* key = (unsigned char*)"1wradfr4e3fefefad4545454h6thrsf";//32å­—èŠ‚ 256ä½
 	AES_KEY aes;
 
 	AES_set_encrypt_key(key, 256, &aes);
-	//¼ÓÃÜ
+	//åŠ å¯†
 	AES_ecb_encrypt((unsigned char*)datas, (unsigned char*)en_data,&aes, 1);
-	std::cout << "¼ÓÃÜ£º" << std::endl;
+	std::cout << "åŠ å¯†ï¼š" << std::endl;
 	std::cout << en_data << std::endl;
-	//½âÃÜ
+	//è§£å¯†
 	AES_set_decrypt_key(key, 256, &aes);
 	AES_ecb_encrypt((unsigned char*)en_data, (unsigned char*)de_data, &aes, 0);
-	std::cout << "½âÃÜ£º" << std::endl;
+	std::cout << "è§£å¯†ï¼š" << std::endl;
 	std::cout << de_data << std::endl;
 
 }
 
-int Encpypt::public_key_encrypt(unsigned char* data, int len, unsigned char* key, unsigned char* encrypted)
+int Encpypt::public_key_encrypt(unsigned char* data, int len, unsigned char* en_data)
 {
-	return 0;
+	RSA* rsa = nullptr;
+	BIO* keybio = nullptr;
+	keybio = BIO_new_mem_buf(publicKey, -1);
+	if (keybio == nullptr) {
+		std::cout << "failed to create key BIO" << std::endl;
+		return 0;
+	}
+	rsa = PEM_read_bio_RSA_PUBKEY(keybio, &rsa, nullptr, nullptr);
+	int result = RSA_public_encrypt(len, data,en_data, rsa, PADDING);
+	return result;
 }
 
-int Encpypt::public_key_decrypt(unsigned char* en_data, int len, unsigned char* key, unsigned char* decrypted)
-{
-	return 0;
-}
 
-int Encpypt::private_key_encrypt(unsigned char* data, int len, unsigned char* key, unsigned char* encrypted)
-{
-	return 0;
-}
 
-int Encpypt::private_key_decrypt(unsigned char* en_data, int len, unsigned char* key, unsigned char* decrypted)
+
+int Encpypt::private_key_decrypt(unsigned char* en_data, int len, unsigned char* de_data)
 {
-	return 0;
+	RSA* rsa = nullptr;
+	BIO* keybio = nullptr;
+	keybio = BIO_new_mem_buf(privateKey, -1);
+	if (keybio == nullptr) {
+		std::cout << "failed to create key BIO" << std::endl;
+		return 0;
+	}
+	rsa = PEM_read_bio_RSAPrivateKey(keybio, &rsa, nullptr, nullptr);
+	int result = RSA_private_decrypt(len, en_data, de_data, rsa, PADDING);
+	return result;
 }
 
